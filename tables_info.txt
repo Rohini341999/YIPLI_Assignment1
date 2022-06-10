@@ -1,0 +1,46 @@
+"SELECT id,Status,VehicleType from Parking WHERE SlotNo = ? or RegNo = ?",
+
+
+
+Create Table Parking(
+id int(3) auto_increment NOT NULL,
+SlotNo int(3),
+SlotSize int(3),
+Status char,
+VehicleType char,
+VehicleSize int(3),
+RegNo varchar(15),
+primary key(id),
+Unique(RegNo)
+);
+
+Insert into Parking(SlotSize,SlotNo,Status) values (3,1,"E"),
+(2,2,"E"),
+(2,3,"E"),
+(2,4,"E"),
+(2,5,"E");
+
+SELECT Status,SlotNo from Parking WHERE RegNo = "MH05 7632" OR SlotNo = 2;
+
+
+
+
+
+
+
+
+Create table demoParking (id int(3) ,SlotSize int(3), SlotNo int(3), RegNo varchar(20), Status char,VehicleSize int(3));
+Alter table demoParking add VehicleType char;
+
+Update demoParking SET VehicleType = "C" where id = 1;
+
+Update demoParking Set VehicleSize = (if(VehicleType = "S",3,(if(VehicleType = "C",2,1)))); 
+//not needed
+
+update demoParking set SlotSize = (SlotSize-VehicleSize) where VehicleType = "C";
+
+update demoParking set RegNo = "MH05 7632", Status="O" where VehicleType="C"
+
+Update demoParking SET RegNo = "MH05 6839",Status = "O", 
+VehicleSize = (if(VehicleType = "S",3,if(VehicleType = "C",2,1))),
+SlotSize = (SlotSize-VehicleSize) Where (SlotSize < VehicleSize OR SlotSize = VehicleSize);
